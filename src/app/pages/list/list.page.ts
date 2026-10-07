@@ -7,7 +7,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
   selector: 'app-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar,  CommonModule, FormsModule]
 })
 export class ListPage implements OnInit {
 

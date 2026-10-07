@@ -23,4 +23,28 @@
   </ion-button>
 </ion-item>
 
+<ion-list> 
+
+  @if(tasks.length===0) {
+    <ion-item>
+      <ion-label>
+        No hay tareas pendientes
+      </ion-label>
+    </ion-item>
+  } @else {
+ <!-- IonList: Contenedor de elementos de lista -->
+  @for (task of tasks; track task) {
+    <!-- track task : Le indica a Angular como identificar cada elemento para poder actualizar
+      DOM (DOCUMENT DE OBJETOS DEL DOCUMENTO) de forma eficiente 
+      -->
+    <ion-item> 
+<ion-label>
+  {{ task}}
+</ion-label>
+    </ion-item>
+  }
+}
+</ion-list>
+
 </ion-content>
+
