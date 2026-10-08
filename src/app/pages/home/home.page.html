@@ -1,50 +1,70 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center ion-title-bold"> Mis Tareas</ion-title>
+    <ion-title class="ion-text-center ion-title-bold">
+      Mis Tareas
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <!--IonItem: Almacenar diferentes elementos:
-  Imagenes, Inputs,Botones,--> 
-<ion-item>
-  <!-- IonInput: Por defecto son de tipo text Recomendacion: Siempre agregar un nombre-->
-  <ion-input type="text"
-  placeholder="Nueva Tarea"
-  name="task"
-  [(ngModel)]="task"
-  /*Tow-Way Data Binding (Enlace Bidireccional)>*/
-  >
-  
-    
-  </ion-input>
-  <ion-button (click)="addTask()" [disabled]="!task">
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-button>
-</ion-item>
+  Imagenes, Inputs,Botones,-->
+  <ion-item>
+    <!-- IonInput: Por defecto son de tipo text Recomendacion: Siempre agregar un nombre-->
+    <!--Tow-Way Data Binding (Enlace Bidireccional)-->
+    <ion-input
+      type="text"
+      placeholder="Nueva Tarea"
+      name="task"
+      [(ngModel)]="task"
+    >
+    </ion-input>
 
-<ion-list> 
+    <ion-button (click)="addTask()" [disabled]="!task">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
 
-  @if(tasks.length===0) {
-    <ion-item>
-      <ion-label>
-        No hay tareas pendientes
-      </ion-label>
-    </ion-item>
-  } @else {
- <!-- IonList: Contenedor de elementos de lista -->
-  @for (task of tasks; track task) {
-    <!-- track task : Le indica a Angular como identificar cada elemento para poder actualizar
-      DOM (DOCUMENT DE OBJETOS DEL DOCUMENTO) de forma eficiente 
-      -->
-    <ion-item> 
-<ion-label>
-  {{ task}}
-</ion-label>
-    </ion-item>
-  }
-}
-</ion-list>
+  <ion-list>
+    @if (tasks.length === 0) {
+      <ion-item>
+        <ion-label>
+          No hay tareas pendientes
+        </ion-label>
+      </ion-item>
+    } @else {
+      <!-- IonList: Contenedor de elementos de lista -->
+      <ion-reorder-group
+        [disabled]="false"
+        (ionReorderEnd)="orderTasks($event)"
+      >
+        @for (task of tasks; track task) {
+          <!-- track task : Le indica a Angular como identificar cada elemento para poder actualizar
+            DOM (DOCUMENT DE OBJETOS DEL DOCUMENTO) de forma eficiente
+          -->
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>
+                {{ task }}
+              </ion-label>
 
+              <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option
+                color="danger"
+                (click)="confirmDeleteTask(task)"
+              >
+                <ion-icon
+                  slot="icon-only"
+                  name="trash-outline"
+                ></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        }
+      </ion-reorder-group>
+    }
+  </ion-list>
 </ion-content>
-

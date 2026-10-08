@@ -19,5 +19,35 @@ export class Alert {
     // present() es un método que 
     // muestra la alerta en pantalla
     await alert.present();
-  }}
-
+  }
+  async alertConfirm(
+    header: string, // Titulo de la alerta
+    subHeader: string, // Subtitulo de la alerta
+    message: string, // Mensaje de la alerta
+    confirmButtonText: string,
+    functionOk : Function,
+    cancelText : string = 'Cancelar',
+    confirmText : string = 'Aceptar'
+  ) {
+    const alert = await this.alertController.create({
+      header,
+      subHeader,
+      message,
+      buttons: [
+        {
+      text: 'Cancel',
+      role: 'cancel',
+      },
+  
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        functionOk();
+      },
+    },
+      ],
+  })
+await alert.present ();
+  }
+}
